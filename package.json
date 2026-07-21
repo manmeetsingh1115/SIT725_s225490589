@@ -1,0 +1,16 @@
+{
+  "name": "sit725_s225490589",
+  "version": "1.0.0",
+  "description": "SIT725 - Applied Software Engineering",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
