@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Recipe Explorer</title>
+
+    <meta
+        name="description"
+        content="SIT725 Task 4.2P Express and Materialize Recipe Explorer"
+    >
+    <meta name="author" content="Manmeet Singh">
+
+    <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    >
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="orange darken-3">
+        <div class="nav-wrapper navbar-size">
+            <a href="#" class="brand-logo">
+                <i class="material-icons left">restaurant_menu</i>
+                Recipe Explorer
+            </a>
+
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                    <a href="#recipes">Recipes</a>
+                </li>
+                <li>
+                    <a
+                        target="_blank"
+                        href="https://github.com/manmeetsingh1115/SIT725_s225490589"
+                    >
+                        GitHub
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <h1>Welcome to Recipe Explorer</h1>
+
+                        <p class="flow-text">
+                            Discover simple and delicious vegetarian recipes retrieved from MongoDB through an Express REST API.
+                        </p>
+                    </div>
+
+                    <div class="col s12 center-align">
+                        <img
+                            class="materialboxed hero-image"
+                            src="images/vegetable-pasta.jpg"
+                            alt="Vegetable pasta"
+                        >
+                    </div>
+
+                    <div class="col s12 center-align">
+                        <a
+                            class="waves-effect waves-light btn-large orange darken-3 modal-trigger preference-button"
+                            data-target="modal1"
+                        >
+                            <i class="material-icons left">favorite</i>
+                            Share Your Favourite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="recipe-section" id="recipes">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <h3>Featured Vegetarian Recipes</h3>
+
+                        <p class="flow-text grey-text text-darken-2">
+                            Select a recipe card to view more information.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row" id="card-section"></div>
+            </div>
+        </section>
+
+        <div id="modal1" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <h4>Share Your Favourite Recipe</h4>
+
+                <form>
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input id="first_name" type="text" class="validate">
+                            <label for="first_name">First Name</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Last Name</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="favourite_recipe" type="text">
+                            <label for="favourite_recipe">
+                                Favourite Vegetarian Recipe
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <a
+                    href="#!"
+                    class="modal-close waves-effect waves-green btn-flat"
+                >
+                    Cancel
+                </a>
+
+                <a
+                    href="#!"
+                    class="waves-effect waves-light btn orange darken-3"
+                    id="formSubmit"
+                >
+                    Submit
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer orange darken-3">
+        <div class="footer-copyright">
+            <div class="container center-align">
+                SIT725 Task 4.2P - Recipe Explorer
+            </div>
+        </div>
+    </footer>
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>

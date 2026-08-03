@@ -1,0 +1,22 @@
+{
+  "name": "sit725-task-4-2p",
+  "version": "1.0.0",
+  "description": "SIT725 Task 4.2P Database-Backed Recipe Explorer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "materialize",
+    "recipes"
+  ],
+  "author": "Manmeet Singh",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.1"
+  }
+}
