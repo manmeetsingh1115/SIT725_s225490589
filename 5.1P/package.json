@@ -1,0 +1,16 @@
+{
+  "name": "sit725-5-1p-books-mvc",
+  "version": "1.0.0",
+  "description": "A minimal read-only Books catalog built with Node.js, Express, and MVC.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get all books</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="catalog">
+    <h1>Books Catalog</h1>
+    <p class="intro">A collection of five remarkable books.</p>
+    <div id="booksDisplay">Loading...</div>
+  </main>
+
+  <script>
+    const out = document.getElementById('booksDisplay');
+
+    function render(books){
+      out.innerHTML = '';
+      if (!Array.isArray(books) || books.length === 0){
+        out.textContent = 'No books';
+        return;
+      }
+
+      const list = document.createElement('ul');
+      for (const book of books){
+        const item = document.createElement('li');
+        item.textContent = `${book.title} - ${book.author}`;
+        list.appendChild(item);
+      }
+      out.appendChild(list);
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const res = await fetch('/api/books');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const body = await res.json();
+        render(body.data);
+      } catch (err) {
+        console.error('Error fetching books:', err);
+        out.textContent = 'Error fetching books.';
+      }
+    });
+  </script>
+</body>
+</html>
