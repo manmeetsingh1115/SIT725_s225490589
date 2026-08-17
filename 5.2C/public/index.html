@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Books Catalogue</title>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main class="container">
+    <h1>Books Catalogue developed by s225490589</h1>
+
+    <p>Click the button below to get all books from the server:</p>
+
+    <button id="fetchBooksBtn" type="button">
+      Get all books
+    </button>
+
+    <p id="statusMessage" class="status"></p>
+
+    <ul id="booksDisplay" class="books-list"></ul>
+
+    <section id="bookDetails" class="book-details" hidden>
+      <h2>Book Details</h2>
+
+      <p><strong>Title:</strong> <span id="detailTitle"></span></p>
+      <p><strong>Author:</strong> <span id="detailAuthor"></span></p>
+      <p><strong>Year:</strong> <span id="detailYear"></span></p>
+      <p><strong>Genre:</strong> <span id="detailGenre"></span></p>
+      <p><strong>Summary:</strong> <span id="detailSummary"></span></p>
+      <p><strong>Price (AUD):</strong> <span id="detailPrice"></span></p>
+    </section>
+  </main>
+
+  <script>
+    const fetchBooksBtn = document.getElementById('fetchBooksBtn');
+    const booksDisplay = document.getElementById('booksDisplay');
+    const statusMessage = document.getElementById('statusMessage');
+    const bookDetails = document.getElementById('bookDetails');
+
+    function getPrice(price) {
+      if (typeof price === 'string') {
+        return price;
+      }
+
+      if (price && price.$numberDecimal) {
+        return price.$numberDecimal;
+      }
+
+      return price || '';
+    }
+
+    function formatPrice(price) {
+      return Number(getPrice(price)).toString();
+    }
+
+    function renderBooks(books) {
+      booksDisplay.innerHTML = '';
+      bookDetails.hidden = true;
+
+      if (!Array.isArray(books) || books.length === 0) {
+        statusMessage.textContent = 'No books found.';
+        return;
+      }
+
+      statusMessage.textContent = '';
+
+      for (const book of books) {
+        const listItem = document.createElement('li');
+
+        listItem.textContent =
+          `${book.title} ${formatPrice(book.price)} AUD`;
+
+        listItem.addEventListener('click', () => {
+          fetchBookById(book.id);
+        });
+
+        booksDisplay.appendChild(listItem);
+      }
+    }
+
+    async function fetchBookById(id) {
+      statusMessage.textContent = 'Loading book details...';
+
+      try {
+        const response = await fetch(`/api/books/${id}`);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const body = await response.json();
+
+        renderBookDetails(body.data);
+        statusMessage.textContent = '';
+      } catch (error) {
+        console.error('Error fetching book:', error);
+        statusMessage.textContent = 'Error fetching book details.';
+      }
+    }
+
+    function renderBookDetails(book) {
+      document.getElementById('detailTitle').textContent = book.title;
+      document.getElementById('detailAuthor').textContent = book.author;
+      document.getElementById('detailYear').textContent = book.year;
+      document.getElementById('detailGenre').textContent = book.genre;
+      document.getElementById('detailSummary').textContent = book.summary;
+      document.getElementById('detailPrice').textContent =
+        `${formatPrice(book.price)} AUD`;
+
+      bookDetails.hidden = false;
+    }
+
+    fetchBooksBtn.addEventListener('click', async () => {
+      statusMessage.textContent = 'Loading...';
+      booksDisplay.innerHTML = '';
+      bookDetails.hidden = true;
+
+      try {
+        const response = await fetch('/api/books');
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const body = await response.json();
+        renderBooks(body.data);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+        statusMessage.textContent = 'Error fetching books.';
+      }
+    });
+  </script>
+</body>
+</html>
